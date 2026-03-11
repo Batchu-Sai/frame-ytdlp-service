@@ -6,4 +6,5 @@ RUN pip install --no-cache-dir yt-dlp fastapi uvicorn
 WORKDIR /app
 COPY main.py .
 
+EXPOSE ${PORT:-8000}
 CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
