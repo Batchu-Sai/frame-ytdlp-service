@@ -2,6 +2,7 @@ import os
 import subprocess
 import tempfile
 import uuid
+import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
@@ -107,3 +108,8 @@ async def health():
         return {"status": "ok", "ytdlp_version": result.stdout.strip()}
     except Exception as e:
         return {"status": "degraded", "error": str(e)}
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
